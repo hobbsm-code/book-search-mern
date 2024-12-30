@@ -6,11 +6,16 @@ import { ApolloServer } from '@apollo/server';// Note: Import from @apollo/serve
 import { expressMiddleware } from '@apollo/server/express4';
 import { typeDefs, resolvers } from './schemas/index.js';
 import { authenticateToken } from './services/auth.js';
+import { fileURLToPath } from 'node:url';
+import { dirname } from 'node:path';
 
 const server = new ApolloServer({
   typeDefs,
   resolvers
 });
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const startApolloServer = async () => {
   await server.start();
